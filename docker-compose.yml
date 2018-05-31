@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  db:
+    image: mysql:5.6
+    environment:
+      MYSQL_USER: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+
+  api:
+    depends_on:
+      - db
+    links:
+      - db
+    build: .
+    ports:
+      - '3000:3000'
+    command: rails server -p 3000 -b '0.0.0.0'
+    volumes: 
+      - '.:/usr/src/app'
+    environment:       
+      RAILS_ENV: development
+      DB_USER: 'root'
+      DB_PASSWORD: 'root'
+      DB_HOST: 'db'
