@@ -1,4 +1,4 @@
-FROM ruby:2.5
+FROM ruby:2.5.0-alpine
  
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
